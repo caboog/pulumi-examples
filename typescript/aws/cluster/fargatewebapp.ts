@@ -56,9 +56,9 @@ export class FargateWebApp extends pulumi.ComponentResource {
         )  
 
         this.atg = new aws.lb.TargetGroup(name, {
-            targetType: "alb",
+            targetType: "ip",
             port: 80,
-            protocol: "TCP",
+            protocol: "HTTP",
             vpcId: args.vpcId,
         },
         {parent: this}
