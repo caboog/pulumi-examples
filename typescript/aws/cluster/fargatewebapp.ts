@@ -14,8 +14,8 @@ export class FargateWebApp extends pulumi.ComponentResource {
     cluster: aws.ecs.Cluster;
     securityGroup: aws.ec2.SecurityGroup;
     alb: aws.lb.LoadBalancer;
-   /* atg: aws.lb.TargetGroup;
-    wl: aws.lb.Listener;*/
+    atg: aws.lb.TargetGroup;
+    wl: aws.lb.Listener;
     
     role: aws.iam.Role;
     rpa: aws.iam.RolePolicyAttachment;
@@ -54,7 +54,7 @@ export class FargateWebApp extends pulumi.ComponentResource {
         },
         {parent: this}
         )  
-/*
+
         this.atg = new aws.lb.TargetGroup(name, {
             targetType: "alb",
             port: 80,
@@ -74,7 +74,7 @@ export class FargateWebApp extends pulumi.ComponentResource {
         },
         {parent: this}
         )
-*/
+
         this.role = new aws.iam.Role(name, {
             assumeRolePolicy: JSON.stringify({ 
                 Version: "2008-10-17",
@@ -128,14 +128,13 @@ export class FargateWebApp extends pulumi.ComponentResource {
                 subnets: args.subnetIds,
                 securityGroups: [this.securityGroup.id],
             },
-            // loadBalancers: [{
-            //     targetGroupArn: this.atg.arn,
-            //     containerName: "my-app",
-            //     containerPort: 80,
-            // }],
+             loadBalancers: [{
+                 targetGroupArn: this.atg.arn,
+                 containerName: "my-app",
+                 containerPort: 80,
+                }],
         },
-            //{dependsOn: this.wl, parent: this} 
-            { parent: this }
+            {dependsOn: this.wl, parent: this} 
 
         )
 
