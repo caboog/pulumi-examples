@@ -7,7 +7,7 @@ import * as s3bucket from "./s3";
 //const bucket = new aws.s3.Bucket("my-bucket");
 
 const bucket = new s3bucket.S3Bucket(
-    'boog', {
+    'boog2', {
 
     }
 )

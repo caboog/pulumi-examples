@@ -1,5 +1,6 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
+import { Output } from "@pulumi/pulumi";
 
 
 
@@ -16,11 +17,13 @@ export class S3Bucket extends pulumi.ComponentResource {
 
         this.bucket = new aws.s3.Bucket(name, {}, {parent: this})
 
-        let bucketName = pulumi.all([this.bucket.id])
-            console.log(bucketName)
-            // .all([this.bucket.id])
-            // .apply([this.bucket.id]) => {
-            //     console.log(this.bucket.id)} 
+        //Does not work.
+        let bucketName = pulumi.all([this.bucket.id]).
+              apply([this.bucket.id]) => {
+                 console.log(this.bucket.id)};
+
+        // //Does not work.
+        // const bucketName: Output<string> = pulumi.all([this.bucket.id]).apply([this.bucket.id]) => {console.log(this.bucket.id)};
 
         // this.role = new aws.iam.Role(name, {
         //     assumeRolePolicy: JSON.stringify({
