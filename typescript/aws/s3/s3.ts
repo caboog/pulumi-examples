@@ -1,8 +1,17 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 import { Output } from "@pulumi/pulumi";
+import * as asyncmutex from 'async-mutex';
 
+const mutex = new asyncmutex.Mutex();
 
+mutex
+    .runExclusive(function() {
+        // ...
+    })
+    .then(function(result) {
+        // ...
+    });
 
 export class S3Bucket extends pulumi.ComponentResource {
 
@@ -18,9 +27,9 @@ export class S3Bucket extends pulumi.ComponentResource {
         this.bucket = new aws.s3.Bucket(name, {}, {parent: this})
 
         //Does not work.
-        let bucketName = pulumi.all([this.bucket.id]).
-              apply([this.bucket.id]) => {
-                 console.log(this.bucket.id)};
+        // let bucketName = pulumi.all([this.bucket.id]).
+        //       apply([this.bucket.id]) => {
+        //          console.log(this.bucket.id)};
 
         // //Does not work.
         // const bucketName: Output<string> = pulumi.all([this.bucket.id]).apply([this.bucket.id]) => {console.log(this.bucket.id)};
