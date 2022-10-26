@@ -15,9 +15,9 @@ func main() {
 		if err != nil {
 			return err
 		}
-		org, err := organizations.NewIAMBinding(ctx, "binding", &organizations.IAMBindingArgs{
+		org, err := organizations.NewIAMBinding(ctx, "prom-frontend-bind", &organizations.IAMBindingArgs{
 			Members: pulumi.StringArray{
-				pulumi.String("serviceaccount:prom-frontend@project-id.iam.gserviceaccount.com"),
+				pulumi.String("serviceaccount:prom-frontend@experiments.iam.gserviceaccount.com"),
 			},
 			OrgId: pulumi.String("1223456789"),
 			Role:  pulumi.String("roles/storage.admin"),

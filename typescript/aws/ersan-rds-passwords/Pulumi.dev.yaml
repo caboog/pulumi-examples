@@ -1,0 +1,18 @@
+config:
+  aws:region: us-east-1
+  rds:applyImmediately: true
+  rds:backupWindow: “09:00-09:45”
+  rds:deletionProtection: false
+  rds:maintenanceWindow: “tue:10:00-tue:10:30"
+  rds:parameterGroupFamily: aurora-postgresql14
+  rds:port: 5432
+  rds:skipFinalSnapshot: true
+  # rds:services:
+  #   # `name` here is also the kubernetes namespace which the service lives in for the k8s resource creation
+  #   # left this as manual config entries so that we can provision databases based on need of service
+  #   # rather than “provision for all service namespaces”
+  #   calendar-service:
+  #     database: calendardb
+  #     databaseUser: calendaruser
+  #     # instanceClass: t3.medium #defaults to t3.medium but you can modify it here per service
+  #     name: calendar-service
