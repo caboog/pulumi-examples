@@ -1,5 +1,5 @@
 config:
-  aws:region: us-east-1
+  aws:region: us-east-2
   rds:applyImmediately: true
   rds:backupWindow: “09:00-09:45”
   rds:deletionProtection: false
